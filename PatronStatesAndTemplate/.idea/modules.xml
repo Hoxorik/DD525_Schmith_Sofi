@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MaquinaExpendedora/MaquinaExpendedora.iml" filepath="$PROJECT_DIR$/MaquinaExpendedora/MaquinaExpendedora.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PatronStatesAndTemplate.iml" filepath="$PROJECT_DIR$/PatronStatesAndTemplate.iml" />
+    </modules>
+  </component>
+</project>
