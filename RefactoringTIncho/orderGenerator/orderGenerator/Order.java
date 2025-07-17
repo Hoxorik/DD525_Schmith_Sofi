@@ -27,4 +27,8 @@ public class Order {
     public double getTotalAmount() { return totalAmount; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
+    //lo agregue yo
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
 }

@@ -9,13 +9,23 @@ import java.util.UUID;
 
 public class OrderProcessor {
     // Dependencias directas (violan DIP)
-    private Database database;
-    private EmailService emailService;
-    private SMSService smsService;
-    private InventoryService inventoryService;
-    private ShippingService shippingService;
-    private Logger logger;
+    //ARREGLADOO
+    private IDatabase db;
+    private IEmail emailService;
+    private ISMS smsService;
+    private IInventory inventoryService;
+    private IShipping shippingService;
+    private ILogger logger;
+    
+    public OrderProcessor(IDatabase db, IEmail mail, ISMS smsService, IInventory inventoryService, IShipping shippingService, ILogger logger){
+        this.db = db;
+        this.emailService = mail;
+        this.smsService = smsService;
+        this.inventoryService = inventoryService;
+        this.shippingService = shippingService;
+        this.logger = logger;
 
+    }
     public boolean validateOrder(Order order) {
         logger.log("Validando orden " + order.getId());
         if (order.getUser().getEmail() == null || order.getUser().getEmail().isEmpty()) {
@@ -52,27 +62,30 @@ public class OrderProcessor {
                 logger.log("Tipo de descuento desconocido: " + discountType);
                 adjusted = original;
         }
+        order.setTotalAmount(adjusted);
         // Reemplazo por reflexión (mal práctica) para cambiar totalAmount
-        try {
+       /* try {
             Field field = Order.class.getDeclaredField("totalAmount");
             field.setAccessible(true);
             field.set(order, adjusted);
         } catch (Exception e) {
             logger.log("Error ajustando totalAmount por reflexión: " + e.getMessage());
-        }
+        }*/
     }
 
     public void applyPricing(Order order) {
         logger.log("Calculando impuestos para " + order.getId());
         double taxed = order.getTotalAmount() * 1.18; // +18% IVA
         order.setStatus("PRICED");
+        order.setTotalAmount(taxed);
+        /*
         try {
             Field field = Order.class.getDeclaredField("totalAmount");
             field.setAccessible(true);
             field.set(order, taxed);
         } catch (Exception e) {
             logger.log("Error ajustando precio con reflexión: " + e.getMessage());
-        }
+        }*/
     }
 
     public void updateInventory(Order order) {

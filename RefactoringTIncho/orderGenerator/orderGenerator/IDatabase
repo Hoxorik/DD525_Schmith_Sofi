@@ -1,0 +1,3 @@
+public interface IDatabase {
+    void save (String table, String key, Object obj);
+}
