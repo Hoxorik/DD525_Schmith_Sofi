@@ -1,0 +1,6 @@
+public class GraceDiscount implements DiscountStrategy {
+    public double applyDiscount(double totalAmount) {
+        return totalAmount - 10;
+    }
+    public String getName() { return "GRACE"; }
+}

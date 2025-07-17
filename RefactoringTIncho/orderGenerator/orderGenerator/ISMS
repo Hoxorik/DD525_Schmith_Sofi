@@ -1,3 +1,0 @@
-public Interface ISMS{
-    void sendSMS(String phone, String message);
-}

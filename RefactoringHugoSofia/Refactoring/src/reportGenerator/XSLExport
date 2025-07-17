@@ -1,0 +1,9 @@
+public class XlsExport implements ExportStrategy {
+    public void export(Data data) {
+        System.out.println("Creando XLS con contenido: " + data);
+    }
+
+    public String getFormat() {
+        return "XLS";
+    }
+}

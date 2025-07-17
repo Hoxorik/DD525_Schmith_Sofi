@@ -1,0 +1,22 @@
+public class SendNotificationsStep implements OrderStep {
+    private EmailService emailService;
+    private SMSService smsService;
+    private Logger logger;
+
+    public SendNotificationsStep(EmailService emailService, SMSService smsService, Logger logger) {
+        this.emailService = emailService;
+        this.smsService = smsService;
+        this.logger = logger;
+    }
+
+    @Override
+    public boolean execute(Order order) {
+        String msg = "Hola " + order.getUser().getName()
+                + ", tu orden " + order.getId()
+                + " por $" + order.getTotalAmount() + " fue confirmada.";
+        emailService.sendEmail(order.getUser().getEmail(), "Orden Confirmada", msg);
+        smsService.sendSMS(order.getUser().getPhone(), msg);
+        logger.log("Notificaciones enviadas para orden " + order.getId());
+        return true;
+    }
+}

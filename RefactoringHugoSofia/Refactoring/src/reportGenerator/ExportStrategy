@@ -1,0 +1,4 @@
+public interface ExportStrategy {
+    void export(Data data);
+    String getFormat(); // para mapear el formato (ej: "PDF")
+}

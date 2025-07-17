@@ -1,0 +1,18 @@
+public class UpdateInventoryStep implements OrderStep {
+    private InventoryService inventoryService;
+    private Logger logger;
+
+    public UpdateInventoryStep(InventoryService inventoryService, Logger logger) {
+        this.inventoryService = inventoryService;
+        this.logger = logger;
+    }
+
+    @Override
+    public boolean execute(Order order) {
+        logger.log("Actualizando stock para " + order.getId());
+        for (Product p : order.getItems()) {
+            inventoryService.decreaseStock(p.getSku(), 1);
+        }
+        return true;
+    }
+}

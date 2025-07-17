@@ -1,3 +1,0 @@
-public Interface IEmail{
-    void sendEmail(String to, String subject, String body);
-}

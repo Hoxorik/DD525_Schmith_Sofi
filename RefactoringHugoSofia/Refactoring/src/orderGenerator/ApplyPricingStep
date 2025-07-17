@@ -1,0 +1,23 @@
+public class ApplyPricingStep implements OrderStep {
+    private Logger logger;
+
+    public ApplyPricingStep(Logger logger) {
+        this.logger = logger;
+    }
+
+    @Override
+    public boolean execute(Order order) {
+        logger.log("Calculando impuestos para " + order.getId());
+        double taxed = order.getTotalAmount() * 1.18; // +18% IVA
+        order.setStatus("PRICED");
+        try {
+            Field field = Order.class.getDeclaredField("totalAmount");
+            field.setAccessible(true);
+            field.set(order, taxed);
+        } catch (Exception e) {
+            logger.log("Error ajustando precio con reflexión: " + e.getMessage());
+            return false;
+        }
+        return true;
+    }
+}

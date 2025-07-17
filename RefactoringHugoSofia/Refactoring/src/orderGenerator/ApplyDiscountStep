@@ -1,0 +1,29 @@
+import java.lang.reflect.Field;
+import java.util.Map;
+
+public class ApplyDiscountStep implements OrderStep {
+    private Logger logger;
+    private Map<String, DiscountStrategy> discountStrategies;
+    private String discountType;
+
+    public ApplyDiscountStep(Logger logger, Map<String, DiscountStrategy> discountStrategies, String discountType) {
+        this.logger = logger;
+        this.discountStrategies = discountStrategies;
+        this.discountType = discountType;
+    }
+
+    @Override
+    public boolean execute(Order order) {
+        logger.log("Aplicando descuento [" + discountType + "] a la orden " + order.getId());
+
+        DiscountStrategy strategy = discountStrategies.get(discountType);
+        if (strategy == null) {
+            logger.log("Tipo de descuento desconocido: " + discountType);
+            return false;  
+        }
+        double adjusted = strategy.applyDiscount(order.getTotalAmount());
+
+        order.setTotalAmount(adjusted);
+        return true;
+    }
+}

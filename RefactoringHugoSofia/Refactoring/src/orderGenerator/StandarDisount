@@ -1,0 +1,6 @@
+public class StandardDiscount implements DiscountStrategy {
+    public double applyDiscount(double totalAmount) {
+        return totalAmount * 0.95;
+    }
+    public String getName() { return "STANDARD"; }
+}

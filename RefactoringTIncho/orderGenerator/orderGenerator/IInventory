@@ -1,4 +1,0 @@
-public Interface IInventory{
-    void decreaseStock(String sku, int qty);
-}
-        

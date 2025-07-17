@@ -1,0 +1,24 @@
+public class ValidateOrder implements OrderStep {
+    private Logger logger;
+
+    public ValidateOrderStep(Logger logger) {
+        this.logger = logger;
+    }
+
+    @Override
+    public boolean execute(Order order) {
+        logger.log("Validando orden " + order.getId());
+
+        if (order.getUser().getEmail() == null || order.getUser().getEmail().isEmpty()) {
+            logger.log("Error: email de usuario inválido");
+            return false;
+        }
+        for (Product p : order.getItems()) {
+            if (p.getStock() <= 0) {
+                logger.log("Error: producto sin stock: " + p.getSku());
+                return false;
+            }
+        }
+        return true;
+    }
+}

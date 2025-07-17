@@ -1,0 +1,4 @@
+public interface DiscountStrategy {
+    double applyDiscount(double totalAmount);
+    String getName(); // Para mapear por tipo de descuento
+}

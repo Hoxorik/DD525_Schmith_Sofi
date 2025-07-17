@@ -1,0 +1,9 @@
+public class PdfExport implements ExportStrategy {
+    public void export(Data data) {
+        System.out.println("Creando PDF con contenido: " + data);
+    }
+
+    public String getFormat() {
+        return "PDF";
+    }
+}
