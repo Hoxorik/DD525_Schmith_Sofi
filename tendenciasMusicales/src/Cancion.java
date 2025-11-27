@@ -88,14 +88,7 @@ public class Cancion {
         this.popularidad = popularidad;
     }
 
-    public void agregarLike() {
-        likes++;
-        popularidad = popularidad.actualizarEstado(this);
-    }
-    public void agregarDislike() {
-        dislikes++;
-        popularidad = popularidad.actualizarEstado(this);
-    }
+
     public void like()
     {
         likes++;
@@ -106,9 +99,5 @@ public class Cancion {
     {
         dislikes++;
         popularidad.dislike(this);
-    }
-
-    public void verificarPopularidad() {
-        popularidad = popularidad.actualizarEstado(this);
     }
 }

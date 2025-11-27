@@ -10,7 +10,7 @@ public class PopularidadEnAuge implements Popularidad {
 
     @Override
     public String obtenerLeyenda(Cancion c) {
-        return c.getArtista() + " – " + c.getTitulo() + " (" + c.getAlbum() + " - " + c.getAnioAlbum() + ")";
+        return c.getArtista() + " – " + c.getTitulo() + " ( " + c.getAlbum() + " - " + c.getAnioAlbum() + " ) ";
     }
 
     public static int getReproduccionesMaximas()
