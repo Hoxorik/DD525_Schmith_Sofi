@@ -3,6 +3,8 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class PopularidadTendencia implements Popularidad {
+    private static final int horasSinReproducirMax = 24;
+
     @Override
     public Icono obtenerIcono() {
         return Icono.FIRE;
@@ -15,7 +17,8 @@ public class PopularidadTendencia implements Popularidad {
 
     @Override
     public Popularidad actualizarEstado(Cancion c) {
-        if (c.getUltimaReproduccion().isBefore(LocalDateTime.now())) { // si no se reprodujo en las ultimas 24 horas (no pude resolverlo)
+        Duration duracion = Duration.between(c.getUltimaReproduccion(), LocalDateTime.now());
+        if (duracion >= horasSinReproducirMax) {
             return new PopularidadNormal();
         }
         return this;

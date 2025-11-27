@@ -19,6 +19,17 @@ public class Cancion {
         this.anioAlbum = anioAlbum;
         this.popularidad = new PopularidadNormal();
     }
+    public Cancion(String tituloCancion, int reproducciones, String artista, int likes, int dislikes, LocalDate fechaPublicacion, LocalDateTime ultimaReproduccion) {
+        this.tituloCancion = tituloCancion;
+        this.reproducciones = reproducciones;
+        this.artista = artista;
+        this.likes = likes;
+        this.dislikes = dislikes;
+        this.fechaPublicacion = fechaPublicacion;
+        this.ultimaReproduccion = ultimaReproduccion;
+        this.popularidad = new Normal();
+
+    }
 
     public void reproducir() {
         this.reproducciones++;
@@ -84,6 +95,17 @@ public class Cancion {
     public void agregarDislike() {
         dislikes++;
         popularidad = popularidad.actualizarEstado(this);
+    }
+    public void like()
+    {
+        likes++;
+        popularidad.like(this);
+    }
+
+    public void dislike()
+    {
+        dislikes++;
+        popularidad.dislike(this);
     }
 
     public void verificarPopularidad() {

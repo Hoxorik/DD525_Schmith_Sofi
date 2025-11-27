@@ -1,4 +1,8 @@
 public class PopularidadEnAuge implements Popularidad {
+    private static final int reproduccionesMaximas = 50000;
+    private static final int likesMaximos = 20000;
+    private static final int dislikesMaximos = 5000;
+
     @Override
     public Icono obtenerIcono() {
         return Icono.ROCKET;
@@ -9,11 +13,26 @@ public class PopularidadEnAuge implements Popularidad {
         return c.getArtista() + " – " + c.getTitulo() + " (" + c.getAlbum() + " - " + c.getAnioAlbum() + ")";
     }
 
+    public static int getReproduccionesMaximas()
+    {
+        return reproduccionesMaximas;
+    }
+
+    public static int getDislikesMaximos()
+    {
+        return dislikesMaximos;
+    }
+
+    public static int getLikesMaximos()
+    {
+        return likesMaximos;
+    }
+
     @Override
     public Popularidad actualizarEstado(Cancion c) {
-        if (c.getDislikes() >= 5000) {
+        if (c.getDislikes() <= dislikesMaximos) {
             return new PopularidadNormal();
-        } else if (c.getReproducciones() > 50000 && c.getLikes() > 20000) {
+        } else if (c.getReproducciones() < reproduccionesMaximas && c.getLikes() < likesMaximos) {
             return new PopularidadTendencia();
         }
         return this;
